@@ -7,7 +7,7 @@
     <script type="text/javascript" src="d3.min.js"></script>
     <script src="anime.min.js"></script>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-      <title>Document</title>
+    <title>Document</title>
     <style type="text/css">
         body {
             color: navy;
@@ -28,278 +28,279 @@
 
         .sug .ans {
             /* text-align: center; */
-            font-weight:border;
+            font-weight: border;
             font-size: 24px
         }
     </style>
 
 </head>
 
-<body background="imgs/cosmetic2.jpg">
-    <div id="div1" class="sug">
-        <h4 class="tit" id='recom'></h4>
-        <h3 class="ans" id='recom1'></h3>
-        <h3 class="ans" id='recom2'></h3>
-        <h3 class="ans" id='recom3'></h3>
-    </div>
+    <body background="imgs/cosmetic2.jpg">
+        <div id="div1" class="sug">
+            <h4 class="tit" id='recom'></h4>
+            <h3 class="ans" id='recom1'></h3>
+            <h3 class="ans" id='recom2'></h3>
+            <h3 class="ans" id='recom3'></h3>
+        </div>
 
-    <h4>查詢類別</h4>
-    <form id="search" method="post" action="option.php">
-        <input type="radio" name="search" value="brand" required checked>
-        <label for="brand" id="label1">品牌</label>
-        <input type="radio" name="search" value="category">
-        <label for="category" id="label2">產品類別</label>
-        <input type="radio" name="search" value="B+C">
-        <label for="B+C" id="label3" style="background-color: rgba(255, 255, 255, 0.4)")>品牌+產品類別</label>
-    </form>
-    <hr />
-    <h4>會員查詢</h4>
-    會員ID：
-    <input type="text" id="id" maxlength="12" size="14" placeholder="ABC123456789" />
-    <br>
-    <br>
-    <input type="button" value="查詢" id="click1" style="font-size:18px; font-weight:600" />
-    <hr />
-    <h4>年齡性別查詢</h4>
-    <form id="gender" method="post" action="option.php">
-        性別：
-        <input type="radio" name="gender" value="1" required>
-        <label for="male1">男</label>
-        <input type="radio" name="gender" value="0" checked>
-        <label for="female1">女</label>
-    </form>
-    <br /> 年齡：
-    <input type="text" id="age" maxlength="3" size="4" placeholder="0-100" />
-    <span id="spAge"></span>
-    <br>
-    <br>
-    <input type="button" value="查詢" id="click2" style="font-size:18px; font-weight:600" />
-    <hr />
+        <h4>查詢類別</h4>
+        <form id="search" method="post" action="option.php">
+            <input type="radio" name="search" value="brand" required checked>
+            <label for="brand" id="label1">品牌</label>
+            <input type="radio" name="search" value="category">
+            <label for="category" id="label2">產品類別</label>
+            <input type="radio" name="search" value="B+C">
+            <label for="B+C" id="label3" style="background-color: rgba(255, 255, 255, 0.4)" )>品牌+產品類別</label>
+        </form>
+        <hr />
+        <h4>會員查詢</h4>
+        會員ID：
+        <input type="text" id="id" maxlength="12" size="14" placeholder="ABC123456789" />
+        <br>
+        <br>
+        <input type="button" value="查詢" id="click1" style="font-size:18px; font-weight:600" />
+        <hr />
+        <h4>年齡性別查詢</h4>
+        <form id="gender" method="post" action="option.php">
+            性別：
+            <input type="radio" name="gender" value="1" required>
+            <label for="male1">男</label>
+            <input type="radio" name="gender" value="0" checked>
+            <label for="female1">女</label>
+        </form>
+        <br /> 年齡：
+        <input type="text" id="age" maxlength="3" size="4" placeholder="0-100" />
+        <span id="spAge"></span>
+        <br>
+        <br>
+        <input type="button" value="查詢" id="click2" style="font-size:18px; font-weight:600" />
+        <hr />
 
 
-    <script type="text/javascript">
-        document.getElementById("click1").onclick = click1
-        document.getElementById("click2").onclick = click2
-        restr = '可能會喜歡...'
-        function click1() {
-            anime.timeline({ loop: false })
-                .add({
-                    targets: '.sug .ans',
-                    scale: [14, 1],
-                    opacity: [0, 1],
-                    easing: "easeOutCirc",
-                    duration: 1200,
-                    delay: function (el, i) {
-                        return 500 * i;
-                    }
-                });
-            document.getElementById("div1").style.background = "rgba(0,0,0,0.4)"
-            var selection = document.getElementById("search").search.value;
-            var tid = document.getElementById("id").value;
-            if (selection == "brand") {
-                d3.csv("result/recommand_brand.csv", function (error, csvdata) {
-                    if (error) {
-                        console.log(error);
-                    }
-                    console.log(csvdata);
-                    for (var i = 0; i < csvdata.length; i++) {
-                        var id = csvdata[i].id
-                        if (id == tid) {
-                            document.getElementById('recom').innerHTML = '客戶' + id + restr
-                            document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].recommand_1
-                            document.getElementById('recom2').innerHTML = '2. ' + csvdata[i].recommand_2
-                            document.getElementById('recom3').innerHTML = '3. ' + csvdata[i].recommand_3
-                            break;
+        <script type="text/javascript">
+            document.getElementById("click1").onclick = click1
+            document.getElementById("click2").onclick = click2
+            restr = '可能會喜歡...'
+            function click1() {
+                anime.timeline({ loop: false })
+                    .add({
+                        targets: '.sug .ans',
+                        scale: [14, 1],
+                        opacity: [0, 1],
+                        easing: "easeOutCirc",
+                        duration: 1200,
+                        delay: function (el, i) {
+                            return 500 * i;
                         }
-                        if (i == csvdata.length - 1) {
-                            document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
-                            document.getElementById('recom1').innerHTML = ""
-                            document.getElementById('recom2').innerHTML = ""
-                            document.getElementById('recom3').innerHTML = ""
-                        }
-                    }
-                });
-            }
-            if (selection == "category") {
-                d3.csv("result/recommand_category.csv", function (error, csvdata) {
-                    if (error) {
-                        console.log(error);
-                    }
-                    console.log(csvdata);
-                    for (var i = 0; i < csvdata.length; i++) {
-                        var id = csvdata[i].id
-                        if (id == tid) {
-                            document.getElementById('recom').innerHTML = '客戶' + id + restr
-                            document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].recommand_1
-                            document.getElementById('recom2').innerHTML = '2. ' + csvdata[i].recommand_2
-                            document.getElementById('recom3').innerHTML = '3. ' + csvdata[i].recommand_3
-                            break;
-                        }
-                        if (i == csvdata.length - 1) {
-                            document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
-                            document.getElementById('recom1').innerHTML = ""
-                            document.getElementById('recom2').innerHTML = ""
-                            document.getElementById('recom3').innerHTML = ""
-                        }
-                    }
-                });
-            }
-            if (selection == "B+C") {
-                d3.csv("result/recommand_brand_category.csv", function (error, csvdata) {
-                    if (error) {
-                        console.log(error);
-                    }
-                    console.log(csvdata);
-                    for (var i = 0; i < csvdata.length; i++) {
-                        var id = csvdata[i].id
-                        if (id == tid) {
-                            document.getElementById('recom').innerHTML = '客戶' + id + restr
-                            document.getElementById('recom1').innerHTML = '1. ' + split2(csvdata[i].recommand_1) + '-' + split1(csvdata[i].recommand_1)
-                            document.getElementById('recom2').innerHTML = '2. ' + split2(csvdata[i].recommand_2) + '-' + split1(csvdata[i].recommand_2)
-                            document.getElementById('recom3').innerHTML = '3. ' + split2(csvdata[i].recommand_3) + '-' + split1(csvdata[i].recommand_3)
-                            break;
-                        }
-                        if (i == csvdata.length - 1) {
-                            document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
-                            document.getElementById('recom1').innerHTML = ""
-                            document.getElementById('recom2').innerHTML = ""
-                            document.getElementById('recom3').innerHTML = ""
-                        }
-                    }
-                });
-            }
-        }
-        function click2() {
-            anime.timeline({ loop: false })
-                .add({
-                    targets: '.sug .ans',
-                    scale: [14, 1],
-                    opacity: [0, 1],
-                    easing: "easeOutCirc",
-                    duration: 1200,
-                    delay: function (el, i) {
-                        return 500 * i;
-                    }
-                });
-            var selection = document.getElementById("search").search.value;
-            var gender = document.getElementById("gender").gender.value;
-            document.getElementById("div1").style.background = "rgba(0,0,0,0.4)"
-            if (gender == 0) {
-                var sex = '女性'
-            } else if (gender == 1) {
-                var sex = '男性'
-            }
-            var age = document.getElementById('age').value;
-            if (age > 0 & age < 101) {
-                glist = [0, 19, 21, 23, 33, 41, 101]
-                for (var i = 0; i < glist.length; i++) {
-                    while (glist[i] <= age & age < glist[i + 1]) {
-                        var tgroup = i + '_' + gender
-                        break;
-                    }
-                }
+                    });
+                document.getElementById("div1").style.background = "rgba(0,0,0,0.4)"
+                var selection = document.getElementById("search").search.value;
+                var tid = document.getElementById("id").value;
                 if (selection == "brand") {
-                    d3.csv("result/group_top_n_brand.csv", function (error, csvdata) {
+                    d3.csv("result/recommand_brand.csv", function (error, csvdata) {
                         if (error) {
                             console.log(error);
                         }
                         console.log(csvdata);
                         for (var i = 0; i < csvdata.length; i++) {
-                            var group = csvdata[i].group
-                            var match = false
-                            if (group == tgroup) {
-                                match = true
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].brand
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].brand
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].brand
+                            var id = csvdata[i].id
+                            if (id == tid) {
+                                document.getElementById('recom').innerHTML = '客戶' + id + restr
+                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].recommand_1
+                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[i].recommand_2
+                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[i].recommand_3
                                 break;
                             }
+                            if (i == csvdata.length - 1) {
+                                document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
+                                document.getElementById('recom1').innerHTML = ""
+                                document.getElementById('recom2').innerHTML = ""
+                                document.getElementById('recom3').innerHTML = ""
+                            }
                         }
-                        if (match == false) {
-                            d3.csv("result/top_n_brand.csv", function (error, csvdata) {
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].brand
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].brand
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].brand
-                            })
-                        }
-                    })
+                    });
                 }
                 if (selection == "category") {
-                    d3.csv("result/group_top_n_category.csv", function (error, csvdata) {
+                    d3.csv("result/recommand_category.csv", function (error, csvdata) {
                         if (error) {
                             console.log(error);
                         }
                         console.log(csvdata);
                         for (var i = 0; i < csvdata.length; i++) {
-                            var group = csvdata[i].group
-                            var match = false
-                            if (group == tgroup) {
-                                match = true
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].category
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].category
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].category
+                            var id = csvdata[i].id
+                            if (id == tid) {
+                                document.getElementById('recom').innerHTML = '客戶' + id + restr
+                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].recommand_1
+                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[i].recommand_2
+                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[i].recommand_3
                                 break;
                             }
+                            if (i == csvdata.length - 1) {
+                                document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
+                                document.getElementById('recom1').innerHTML = ""
+                                document.getElementById('recom2').innerHTML = ""
+                                document.getElementById('recom3').innerHTML = ""
+                            }
                         }
-                        if (match == false) {
-                            d3.csv("result/top_n_category.csv", function (error, csvdata) {
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].category
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].category
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].category
-                            })
-                        }
-                    })
+                    });
                 }
                 if (selection == "B+C") {
-                    d3.csv("result/group_top_n_pair.csv", function (error, csvdata) {
+                    d3.csv("result/recommand_brand_category.csv", function (error, csvdata) {
                         if (error) {
                             console.log(error);
                         }
                         console.log(csvdata);
                         for (var i = 0; i < csvdata.length; i++) {
-                            var group = csvdata[i].group
-                            var match = false
-                            if (group == tgroup) {
-                                match = true
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].brand + '-' + csvdata[i].category
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].brand + '-' + csvdata[i + 1].category
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].brand + '-' + csvdata[i + 2].category
+                            var id = csvdata[i].id
+                            if (id == tid) {
+                                document.getElementById('recom').innerHTML = '客戶' + id + restr
+                                document.getElementById('recom1').innerHTML = '1. ' + split2(csvdata[i].recommand_1) + '-' + split1(csvdata[i].recommand_1)
+                                document.getElementById('recom2').innerHTML = '2. ' + split2(csvdata[i].recommand_2) + '-' + split1(csvdata[i].recommand_2)
+                                document.getElementById('recom3').innerHTML = '3. ' + split2(csvdata[i].recommand_3) + '-' + split1(csvdata[i].recommand_3)
                                 break;
                             }
+                            if (i == csvdata.length - 1) {
+                                document.getElementById('recom').innerHTML = "查無此會員( " + tid + " )"
+                                document.getElementById('recom1').innerHTML = ""
+                                document.getElementById('recom2').innerHTML = ""
+                                document.getElementById('recom3').innerHTML = ""
+                            }
                         }
-                        if (match == false) {
-                            d3.csv("result/top_n_cb.csv", function (error, csvdata) {
-                                document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
-                                document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].brand + '-' + csvdata[0].category
-                                document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].brand + '-' + csvdata[1].category
-                                document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].brand + '-' + csvdata[2].category
-                            })
-                        }
-                    })
+                    });
                 }
-            } else {
-                document.getElementById('recom').innerHTML = "請填入0-100歲的年齡"
-                document.getElementById('recom1').innerHTML = ""
-                document.getElementById('recom2').innerHTML = ""
-                document.getElementById('recom3').innerHTML = ""
             }
-        }
-        function split1(string) {
-            string = string.split(',', 2)[0].replace(/\(/, '').replace(/\'/g, '')
-            return string
-        }
-        function split2(string) {
-            string = string.split(',', 2)[1].replace(/\)/, '').replace(/\'/g, '')
-            return string
-        }
+            function click2() {
+                anime.timeline({ loop: false })
+                    .add({
+                        targets: '.sug .ans',
+                        scale: [14, 1],
+                        opacity: [0, 1],
+                        easing: "easeOutCirc",
+                        duration: 1200,
+                        delay: function (el, i) {
+                            return 500 * i;
+                        }
+                    });
+                var selection = document.getElementById("search").search.value;
+                var gender = document.getElementById("gender").gender.value;
+                document.getElementById("div1").style.background = "rgba(0,0,0,0.4)"
+                if (gender == 0) {
+                    var sex = '女性'
+                } else if (gender == 1) {
+                    var sex = '男性'
+                }
+                var age = document.getElementById('age').value;
+                if (age > 0 & age < 101) {
+                    glist = [0, 19, 21, 23, 33, 41, 101]
+                    for (var i = 0; i < glist.length; i++) {
+                        while (glist[i] <= age & age < glist[i + 1]) {
+                            var tgroup = i + '_' + gender
+                            break;
+                        }
+                    }
+                    if (selection == "brand") {
+                        d3.csv("result/group_top_n_brand.csv", function (error, csvdata) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(csvdata);
+                            for (var i = 0; i < csvdata.length; i++) {
+                                var group = csvdata[i].group
+                                var match = false
+                                if (group == tgroup) {
+                                    match = true
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].brand
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].brand
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].brand
+                                    break;
+                                }
+                            }
+                            if (match == false) {
+                                d3.csv("result/top_n_brand.csv", function (error, csvdata) {
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].brand
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].brand
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].brand
+                                })
+                            }
+                        })
+                    }
+                    if (selection == "category") {
+                        d3.csv("result/group_top_n_category.csv", function (error, csvdata) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(csvdata);
+                            for (var i = 0; i < csvdata.length; i++) {
+                                var group = csvdata[i].group
+                                var match = false
+                                if (group == tgroup) {
+                                    match = true
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].category
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].category
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].category
+                                    break;
+                                }
+                            }
+                            if (match == false) {
+                                d3.csv("result/top_n_category.csv", function (error, csvdata) {
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].category
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].category
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].category
+                                })
+                            }
+                        })
+                    }
+                    if (selection == "B+C") {
+                        d3.csv("result/group_top_n_pair.csv", function (error, csvdata) {
+                            if (error) {
+                                console.log(error);
+                            }
+                            console.log(csvdata);
+                            for (var i = 0; i < csvdata.length; i++) {
+                                var group = csvdata[i].group
+                                var match = false
+                                if (group == tgroup) {
+                                    match = true
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[i].brand + '-' + csvdata[i].category
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[i + 1].brand + '-' + csvdata[i + 1].category
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[i + 2].brand + '-' + csvdata[i + 2].category
+                                    break;
+                                }
+                            }
+                            if (match == false) {
+                                d3.csv("result/top_n_cb.csv", function (error, csvdata) {
+                                    document.getElementById('recom').innerHTML = age + '歲的' + sex + '客戶' + restr
+                                    document.getElementById('recom1').innerHTML = '1. ' + csvdata[0].brand + '-' + csvdata[0].category
+                                    document.getElementById('recom2').innerHTML = '2. ' + csvdata[1].brand + '-' + csvdata[1].category
+                                    document.getElementById('recom3').innerHTML = '3. ' + csvdata[2].brand + '-' + csvdata[2].category
+                                })
+                            }
+                        })
+                    }
+                } else {
+                    document.getElementById('recom').innerHTML = "請填入0-100歲的年齡"
+                    document.getElementById('recom1').innerHTML = ""
+                    document.getElementById('recom2').innerHTML = ""
+                    document.getElementById('recom3').innerHTML = ""
+                }
+            }
+            function split1(string) {
+                string = string.split(',', 2)[0].replace(/\(/, '').replace(/\'/g, '')
+                return string
+            }
+            function split2(string) {
+                string = string.split(',', 2)[1].replace(/\)/, '').replace(/\'/g, '')
+                return string
+            }
 
 
-    </script>
-</body>
+        </script>
+    </body>
+
 
 </html>
